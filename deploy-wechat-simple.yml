@@ -3,14 +3,14 @@
   remote_user: the5fire  # 如果和当前用户一样，则无需指定
   tasks:
     - name: check out wechat
-      git: dest=~/wechat-env/wechat repo=https://github.com/the5fire/wechat
+      git: dest=~/bb-js-env/bb-js.org repo=https://github.com/bb-js/bb-js.org
            update=yes
     - name: make virtualenv
-      shell: 'virtualenv ~/wechat-env'
+      shell: 'virtualenv ~/bb-js-env'
     - name: install requirements
-      pip: requirements=~/wechat-env/wechat/requirements.txt 
-            virtualenv=~/wechat-env
+      pip: requirements=~/bb-js-env/bb-js.org/requirements.txt 
+           virtualenv=~/bb-js-env
     - name: init database
-      shell: . ./bin/activate && cd wechat/src && ./init_sqlite.py chdir=~/wechat-env
+      shell: . ./bin/activate && cd bb-js.org/src && ./init_sqlite.py chdir=~/bb-js-env
     - name: run server.py
-      shell: . ./bin/activate && cd wechat/src &&  ./run.sh chdir=~/wechat-env
+      shell: . ./bin/activate && cd bb-js.org/src &&  ./run.sh chdir=~/bb-js-env
