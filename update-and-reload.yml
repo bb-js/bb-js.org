@@ -2,6 +2,14 @@
 - hosts: bb-js  # hosts中指定
   remote_user: bb-js  # 如果和当前用户一样，则无需指定
   tasks:
+    - name: check out wechat
+      git: dest=~/bb-js-env/bb-js.org repo=https://github.com/bb-js/bb-js.org
+           update=yes
+    - name: install requirements
+      pip: requirements=~/bb-js-env/bb-js.org/requirements.txt 
+           virtualenv=~/bb-js-env
+    - name: init database
+      shell: . ./bin/activate && cd bb-js.org/src && ./init_sqlite.py chdir=~/bb-js-env
     - name: kill exist pid
       shell: ps aux | grep 'python bb_server.py' | grep -v 'grep' | awk '{print $2}' | xargs kill -9
       ignore_errors: yes

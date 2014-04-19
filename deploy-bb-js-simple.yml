@@ -1,6 +1,6 @@
 ---
-- hosts: speedy-host1  # hosts中指定
-  remote_user: the5fire  # 如果和当前用户一样，则无需指定
+- hosts: bb-js  # hosts中指定
+  remote_user: bb-js  # 如果和当前用户一样，则无需指定
   tasks:
     - name: check out wechat
       git: dest=~/bb-js-env/bb-js.org repo=https://github.com/bb-js/bb-js.org
