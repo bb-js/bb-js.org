@@ -170,9 +170,9 @@
         </div>
     </div>
     </footer>
-    <script data-main="/static/js/app.js" src="/static/js/require.js"></script>
+    <script data-main="/static/js/app.js" src="/static/js/lib/require.js"></script>
 
-    <script src="/static/js/socket.io.js"></script>
+    <script src="/static/js/lib/socket.io.js"></script>
     <script>
     require.config({
         baseUrl: '/static',
@@ -193,9 +193,9 @@
             }
         },
         paths: {
-            "jquery": "js/jquery",   // 改造过的jquery
-            "underscore": "js/underscore",  //同上
-            "backbone": "js/backbone", //同上
+            "jquery": "js/lib/jquery",   // 改造过的jquery
+            "underscore": "js/lib/underscore",  //同上
+            "backbone": "js/lib/backbone", //同上
 
             "user": "js/user", 
             "message": "js/message",
@@ -203,6 +203,7 @@
             "appview": "js/appview",
             "approuter": "js/approuter",
             "app": "js/app",
+            "socket": "js/socket",
         }
     });
     </script>

@@ -9,6 +9,7 @@ define(function(require, exports, module) {
     var Backbone = require('backbone');
     var TopicModule = require('topic');
     var MessageModule = require('message');
+    var socket = require('socket');
 
     var Topics = TopicModule.Topics;
     var TopicView = TopicModule.TopicView;
@@ -19,18 +20,6 @@ define(function(require, exports, module) {
     var MessageView = MessageModule.MessageView;
 
     var topics = new Topics();
-
-    WEB_SOCKET_SWF_LOCATION = "/static/WebSocketMain.swf";
-    WEB_SOCKET_DEBUG = true;
-
-    var socket = io.connect();
-    socket.on('connect', function(){
-        console.log('connected');
-    });
-
-    $(window).bind("beforeunload", function() {
-        socket.disconnect();
-    });
 
     var AppView = Backbone.View.extend({
         el: "#main",
@@ -67,7 +56,7 @@ define(function(require, exports, module) {
         addMessage: function(message) {
             var view = new MessageView({model: message});
             this.message_list.append(view.render().el);
-            self.message_list.scrollTop(self.message_list_div.scrollHeight);
+            this.message_list.scrollTop(this.message_list_div.scrollHeight);
         },
 
         saveMessageEvent: function(evt) {
