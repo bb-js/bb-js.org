@@ -45,7 +45,7 @@ if __name__ == "__main__":
     import sys
     PORT = 8080
     if len(sys.argv) > 1:
-        PORT = sys.argv[1]
+        PORT = int(sys.argv[1])
     print 'http://localhost:%s' % PORT
     server.SocketIOServer(
         ('localhost', PORT),
