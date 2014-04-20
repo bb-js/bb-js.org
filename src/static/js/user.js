@@ -94,10 +94,12 @@ define(function(require, exports, module) {
     var UserView = Backbone.View.extend({
         el: "#user_info",
         username: $('#username'),
+        login_link: $('#login_link'),
 
         show: function(username) {
+            this.login_link.hide();
             this.username.html(username);
-            this.$el.show();
+            this.$el.removeClass('hide');
         },
     });
 
