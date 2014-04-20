@@ -2,7 +2,7 @@
 - hosts: bb-js  # hosts中指定
   remote_user: bb-js  # 如果和当前用户一样，则无需指定
   tasks:
-    - name: check out wechat
+    - name: check out bb-js.org
       git: dest=~/bb-js-env/bb-js.org repo=https://github.com/bb-js/bb-js.org
            update=yes
     - name: make virtualenv
