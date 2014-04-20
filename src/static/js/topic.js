@@ -18,7 +18,7 @@ define(function(require, exports, module) {
     });
 
     var TopicView = Backbone.View.extend({
-        tagName:  "div class='column'",
+        tagName:  "<li class='row topic'>",
         templ: _.template($('#topic-template').html()),
 
         // 渲染列表页模板

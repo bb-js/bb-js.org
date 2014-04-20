@@ -1,175 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="zh-cn">
+  <head>
     <meta charset="utf-8">
-    <title>Backbonejs中文社区 bb-js.org</title>
-    <link rel="stylesheet" class="ui" href="/static/css/semantic.min.css"/>
-    <link rel="stylesheet" class="ui" href="/static/css/body.css"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png">
+
+    <title>Backbonejs中文社区 | bb-js.org</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/offcanvas.css" rel="stylesheet">
     <link rel="stylesheet" class="ui" href="/static/css/chat.css"/>
 
-    <style>
-        .main.container {
-            padding-top:45px;
-        }
-    </style>
-</head>
-<body class="Grid">
-<!-- Top Bar  -->
-<div class="ui fixed transparent inverted main menu">
-    <div class="container">
-        <div class="title item">
-            <b>Backbonejs中文社区(建设中)</b>
-        </div>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+<body>
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Backbonejs中文社区(Beta)</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#index">主页</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a>the5fire</a></li>
+                        <li>
+                        <a href="/logout">退出登录</a>
+                        </li>
+                    </ul>
+                </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
+    </div><!-- /.navbar -->
 
-        <div class="right menu">
-            <div class="title item">
-                Backbonejs交流群：308466740
+    <!-- Content -->
+<div class="container">
+    <div class="row">
+        <!-- main -->
+        <div id="main" class="col-sm-9">
+            <!-- Topic List -->
+            <div id="topic_section">
+                <ul id="topic_list" class="list-unstyled">
+                    <!-- list here -->
+                </ul>
+                <div id="topic_form" class="ui error form segment">
+                    <form role="form">
+                    <div class="form-group">
+                        <label for="topic_title">话题</label>
+                        <input type="text" class="form-control" id="topic_title" placeholder="请问如何学习Backbonejs">
+                    </div>
+                    <div class="form-group">
+                        <label for="topic_tag">Tag</label>
+                        <input type="text" class="form-control" id="topic_tag" placeholder="初学 文档">
+                    </div>
+                    <a class="btn btn-default submit_topic">添加</a>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Message -->
+            <div id="message_section" class="hide">
+                <div id="topic_meta">
+                    <!-- 显示topic信息 -->
+                    <div class="row">
+                        <h2></h2>
+                    </div>
+                </div>
+                <ul id="message_list" class="list-unstyled">
+                    <!-- list here -->
+                </ul>
+                <div id="message_form">
+                    <form role="form">
+                    <div class="form-group">
+                        <label for="topic_title">我也说一句</label>
+                        <textarea id="comment" rows=4 class="form-control"></textarea>
+                        <small>支持Markdown语法</small>
+                    </div>
+                    <a class="btn btn-primary submit">提交</a>
+                    </form>
+                </div>
             </div>
         </div>
-        <div id="user_info" class="right menu hide">
-            <div class="title item">
-                <i class="icon user"></i>
-                <label id="username">the5fire</lable>
+<!-- end main -->
+
+        <!-- sidebar -->
+        <div class="col-sm-3">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
             </div>
-            <a class="popup icon github item" href="/logout" title="退出登录">
-                退出登录
-            </a>
+        </div><!--/span--> 
+        <!-- sidebar -->
+    </div>
+</div>
+<footer>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+        <a href="https://github.com/bb-js/bb-js.org" class="item">本站源码</a>
+        </div>
+        <div class="col-sm-6">
+            开发者： <a href="http://www.the5fire.com" target="_blank">the5fire</a>
         </div>
     </div>
 </div>
-
-<div id="wrapper" style="display: block; z-index: 998;">
-    <div class="container">
-        <div id="login" class="ui two column relaxed grid">
-            <div class="column">
-                <div class="ui fluid form segment">
-                    <h3 class="ui header">登录</h3>
-                    <div class="field">
-                        <label>用户名</label>
-                        <input id="login_username" placeholder="用户名" type="text">
-                    </div>
-                    <div class="field">
-                        <label>密码</label>
-                        <input id="login_pwd" type="password">
-                    </div>
-                    <div class="ui blue login_submit button">登录</div>
-                </div>
-            </div>
-            <div class="column">
-                <div class="ui fluid form segment">
-                    <h3 class="ui header">注册</h3>
-                    <div class="field">
-                        <label>用户名</label>
-                        <input id="reg_username" placeholder="用户名" type="text">
-                    </div>
-                    <div class="field">
-                        <label>密码</label>
-                        <input id="reg_pwd" type="password">
-                    </div>
-                    <div class="field">
-                        <label>重复密码</label>
-                        <input id="reg_pwd_repeat" type="password">
-                    </div>
-                    <div class="inline field">
-                        <div class="ui checkbox">
-                            <input type="checkbox" id="terms">
-                            <label for="terms">我同意the5fire's WeChat网的服务条款。</label>
-                        </div>
-                    </div>
-                    <div class="ui blue registe_submit button">注册</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Content -->
-<div id="main" class="main container">
-
-    <!-- Topic List -->
-    <div id="topic_section">
-        <div id="topic_list" class="ui three column grid">
-        </div>
-        <div id="topic_form" class="ui error form segment">
-            <div class="two fields">
-                <div class="field">
-                    <label>新建Topic</label>
-                    <input id="topic_title" placeholder="topic" type="text">
-                </div>
-            </div>
-            <div class="ui blue submit_topic button">Add</div>
-        </div>
-    </div>
-
-    <!-- Message -->
-    <div  id="message_section" class="ui column grid hide" style="display:none">
-        <div class="column">
-            <div class="circular ui button"><a href="#index">返回列表</a></div>
-            <div class="ui piled blue segment">
-                <h2 class="ui header">
-                    #<i id="message_head"></i>#
-                </h2>
-                <div id="message_list" class="ui comments">
-                    <!-- comments section -->
-                </div>
-                <div class="ui reply form">
-                    <div class="field">
-                        <input type="text" id="comment"/>
-                    </div>
-                    <div id="submit" data="" class="ui fluid blue labeled submit icon button">
-                        <i class="icon edit"></i> 我也来说一句！
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+</footer>
 
 <!-- template -->
 
 <script type="text/template" id="topic-template">
-    <a href="#topic/<%= id %>">
-        <div class="column">
-            <div class="ui segment">
-                <h3><%= title %></h3>
-                <p>
-                创建者：<%= owner_name %>
-                </p>
-                <p>
-                创建时间：<%= created_time %>
-                </p>
-            </div>
-        </div>
-    </a>
+    <div class="status col-sm-1">
+        <span><%= message_count %>人参与</span>
+    </div>
+    <div class="col-sm-9">
+        <h2><a href="#topic/<%= id %>"><%= title %></a></h2>
+        <p>
+        标签: <%= tags %> 时间：<%= created_time %>
+        </p>
+    </div>
+    <div class="author col-sm-2">
+        <p>
+        创建者：<%= owner_name %>
+        </p>
+    </div>
 </script>
 
 <script type="text/template" id="message-template">
-<div class="content <% if(is_mine) { %> right <% } %>" data="<%= id %>">
-        <a class="author"><%= user_name %></a>
-        <br/>
-        <div class="metadata">
-            <span class="date"><%= created_time %></span>
-        </div>
-        <div class="text" style="min-width:55px">
-            <div class="ui pointing label large <% if(is_mine) { %> right <% } %>">
-                <p><%= content %></p>
-            </div>
-        </div>
-    </div>
+<div class="message_meta col-sm-2 <% if(is_mine) { %> self <% } %>" data="<%= id %>">
+    <p>
+    <%= user_name %>
+    </p>
+    <p>
+    <%= created_time %>
+    </p>
+</div>
+<div class="col-sm-9">
+    <p><%= content %></p>
+</div>
 </script>
 
-</div>
-
-    <footer>
-    <div class="ui divider"></div>
-    <div class="container">
-        <div class="ui divided horizontal footer link list">
-            <a href="https://github.com/bb-js/bb-js.org" class="item">Github</a>
-            <div class="item">
-                开发者： <a href="http://www.the5fire.com" target="_blank">the5fire</a>
-            </div>
-        </div>
-    </div>
-    </footer>
     <script data-main="/static/js/app.js" src="/static/js/lib/require.js"></script>
 
     <script src="/static/js/lib/socket.io.js"></script>

@@ -1,56 +1,32 @@
 body {
-    font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    background: #FCFCFC url(../img/bg.jpg) repeat;
-    margin: 0px;
-    padding: 0px;
-    color: #555555;
-    min-width: 320px;
+    padding-top: 70px;
+    padding-bottom: 40px;
 }
+
 .container {
-    width: 915px;
-    margin: 0px auto;
+    width: 970px !important;
 }
-div.right, div.right a.author, div.right div.metadata, div.right>div.text {
-    float: right;
+
+.topic, .message {
+    border-bottom: 1px solid #EEE;
+    padding: 10px;
+    word-wrap: break-word;
 }
-div.content {
-    width: 250px;
+
+#topic_form {
+    background: #eee;
+    padding: 30px;
 }
-#main {
-    min-height: 700px;
+
+#topic_meta {
+    background: cyan;
+    padding: 20px;
 }
-.comment {
-    min-height: 85px;
+
+.message_meta {
+    border-right: 1px solid #eee;
 }
-#message_list {
-    height: 400px;
-    overflow-y: auto;
-}
-.label>p {
-    text-transform: none;
-}
-/*login style*/
-#wrapper {
-    position: absolute;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    overflow: auto;
-    background: #fff;
-}
-#login {
-    padding-top: 200px;
-}
-.hide {
-    display: none;
-}
-footer {
-    position: relative;
-    margin: 0 -2.5%;
-    width: 100%;
-    background: #fff;
-    z-index: 999;
-    bottom: 33px;
+
+.self {
+    background: #ccc;
 }

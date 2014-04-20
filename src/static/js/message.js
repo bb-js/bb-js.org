@@ -27,7 +27,7 @@ define(function(require, exports, module) {
     });
 
     var MessageView = Backbone.View.extend({
-        tagName:  "div class='comment'",
+        tagName:  "<li class='row message'>",
         templ: _.template($('#message-template').html()),
 
         // 渲染列表页模板
