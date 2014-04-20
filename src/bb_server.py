@@ -31,14 +31,13 @@ if web.config.get('_session') is None:
     )
     web.config._session = session
 
-#web.config.debug = False
+web.config.debug = False
 
-from handlers import (  # NOQA
-    IndexHandler, UserHandler,
-    LoginHandler, LogoutHandler,
-    TopicHandler, MessageHandler,
-    SocketHandler,
-)
+from handlers.index import IndexHandler  # noqa
+from handlers.user import UserHandler, LoginHandler, LogoutHandler  # noqa
+from handlers.topic import TopicHandler  # noqa
+from handlers.message import MessageHandler  # noqa
+from handlers.socket import SocketHandler  # noqa
 
 
 if __name__ == "__main__":
