@@ -1,5 +1,6 @@
 
 define(function(require, exports, module) {
+    var $ = require('jquery');
     WEB_SOCKET_SWF_LOCATION = "/static/WebSocketMain.swf";
     WEB_SOCKET_DEBUG = true;
 
