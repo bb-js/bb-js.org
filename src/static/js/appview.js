@@ -32,7 +32,6 @@ define(function(require, exports, module) {
         events: {
             'click .submit': 'saveMessage',
             'click .submit_topic': 'saveTopic',
-            'keypress #comment': 'saveMessageEvent',
         },
 
         initialize: function() {
@@ -59,11 +58,6 @@ define(function(require, exports, module) {
             this.message_list.scrollTop(this.message_list_div.scrollHeight);
         },
 
-        saveMessageEvent: function(evt) {
-            if (evt.keyCode == 13) {
-                this.saveMessage(evt);
-            }
-        },
         saveMessage: function(evt) {
             var comment_box = $('#comment')
             var content = comment_box.val();
@@ -104,7 +98,7 @@ define(function(require, exports, module) {
         showTopic: function(){
             topics.fetch();
             this.topic_section.show();
-            this.message_section.hide();
+            this.message_section.addClass('hide');
             this.message_list.html('');
 
             this.goOut()
@@ -125,7 +119,7 @@ define(function(require, exports, module) {
         showMessage: function(topic_id) {
             this.initMessage(topic_id);
 
-            this.message_section.show();
+            this.message_section.removeClass('hide');
             this.topic_section.hide();
             
             this.showMessageHead(topic_id);

@@ -70,10 +70,11 @@
 
             <!-- Message -->
             <div id="message_section" class="hide">
+                <a class="btn btn-info" href="#index">返回列表</a>
                 <div id="topic_meta">
                     <!-- 显示topic信息 -->
                     <div class="row">
-                        <h2></h2>
+                        <h2 id="message_head"></h2>
                     </div>
                 </div>
                 <ul id="message_list" class="list-unstyled">
@@ -111,6 +112,7 @@
         <!-- sidebar -->
     </div>
 </div>
+
 <footer>
 <div class="container">
     <div class="row">
@@ -124,16 +126,61 @@
 </div>
 </footer>
 
+<!-- login -->
+<div id="wrapper" style="display: block; z-index: 998;">
+    <div id="login" class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <form role="form">
+                <div class="form-group">
+                    <label for="login_username">用户名</label>
+                    <input type="text" class="form-control" id="login_username">
+                </div>
+                <div class="form-group">
+                    <label for="login_pwd">密码</label>
+                    <input type="password" class="form-control" id="login_pwd">
+                </div>
+                <div class="btn btn-primary login_submit">登录</div>
+                </form>
+            </div>
+            <div class="col-sm-6">
+
+                <form role="form">
+                <div class="form-group">
+                    <label for="reg_username">用户名</label>
+                    <input type="text" class="form-control" id="reg_username">
+                </div>
+                <div class="form-group">
+                    <label for="reg_pwd">密码</label>
+                    <input type="password" class="form-control" id="reg_pwd">
+                </div>
+                <div class="form-group">
+                    <label for="reg_pwd_repeat">重复密码</label>
+                    <input type="password" class="form-control" id="reg_pwd_repeat">
+                </div>
+                <div class="checkbox">
+                    <label>
+                    <input type="checkbox"> 我同意bb-js.org的文明上网协议.
+                    </label>
+                </div>
+                <div class="btn btn-primary registe_submit">注册</div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
 <!-- template -->
 
 <script type="text/template" id="topic-template">
     <div class="status col-sm-1">
-        <span><%= message_count %>人参与</span>
+        <span>人参与</span>
     </div>
     <div class="col-sm-9">
         <h2><a href="#topic/<%= id %>"><%= title %></a></h2>
         <p>
-        标签: <%= tags %> 时间：<%= created_time %>
+        标签:  时间：<%= created_time %>
         </p>
     </div>
     <div class="author col-sm-2">
