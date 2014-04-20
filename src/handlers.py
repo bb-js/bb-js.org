@@ -61,6 +61,7 @@ class UserHandler:
 
         user = User.get_by_id(user_id)
         session.login = True
+        user.pop('password')
         session.user = user
 
         result = {

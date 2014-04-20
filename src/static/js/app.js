@@ -17,6 +17,7 @@ define(function(require) {
     g_user.fetch({
         success: function(model, resp, options){
             g_user = resp;
+            appRouter.g_user = g_user;
             Backbone.history.start({pustState: true});
 
             if(g_user === null || g_user.id === undefined) {
