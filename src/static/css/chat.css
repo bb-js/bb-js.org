@@ -7,6 +7,10 @@ body {
     width: 970px !important;
 }
 
+#main {
+    min-height: 700px;
+}
+
 .topic, .message {
     border-bottom: 1px solid #EEE;
     padding: 10px;
