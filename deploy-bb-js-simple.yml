@@ -13,4 +13,4 @@
     - name: init database
       shell: . ./bin/activate && cd bb-js.org/src && ./init_sqlite.py chdir=~/bb-js-env
     - name: run server.py
-      shell: . ./bin/activate && cd bb-js.org/src &&  ./run.sh chdir=~/bb-js-env
+      shell: . ./bin/activate && cd bb-js.org &&  supervisord -c conf/supervisord.conf chdir=~/bb-js-env
