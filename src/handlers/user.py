@@ -22,7 +22,7 @@ class UserHandler:
     def GET(self):
         # 获取当前登录的用户数据
         user = session.user
-        return json.dumps(user)
+        return json.dumps(user.to_json())
 
     def POST(self):
         data = web.data()
@@ -47,7 +47,6 @@ class UserHandler:
 
         user = User.get_by_id(user_id)
         session.login = True
-        user.pop('password')
         session.user = user
 
         result = {
@@ -73,7 +72,7 @@ class LoginHandler:
         session.login = True
         session.user = user
         result = {
-            'id': user.get('id'),
+            'id': user.get('_id'),
             'username': user.get('username'),
         }
         return json.dumps(result)

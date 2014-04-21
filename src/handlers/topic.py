@@ -17,6 +17,7 @@ class TopicHandler:
     def GET(self, pk=None):
         if pk:
             topic = Topic.get_by_id(pk)
+            topic['created_time'] = str(topic['created_time'])
             return json.dumps(topic)
 
         topics = Topic.get_all()

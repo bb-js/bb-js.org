@@ -24,11 +24,12 @@ class MessageHandler:
         current_user_id = session.user.id
         for m in messages:
             try:
-                user = CACHE_USER[m.user_id]
+                user = CACHE_USER[m.get('user_id')]
             except KeyError:
-                user = User.get_by_id(m.user_id)
-                CACHE_USER[m.user_id] = user
+                user = User.get_by_id(m.get('user_id'))
+                CACHE_USER[m.get('user_id')] = user
             message = dict(m)
+            message['created_time'] = str(message['created_time'])
             message['user_name'] = user.username
             message['is_mine'] = (current_user_id == user.id)
             result.append(message)
