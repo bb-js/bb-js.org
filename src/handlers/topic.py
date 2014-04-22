@@ -6,7 +6,7 @@ from datetime import datetime
 import web
 
 from models import User, Topic
-from .base import bad_request
+from .base import bad_request, display_time
 
 session = web.config._session
 
@@ -17,7 +17,7 @@ class TopicHandler:
     def GET(self, pk=None):
         if pk:
             topic = Topic.get_by_id(pk)
-            topic['created_time'] = str(topic['created_time'])
+            topic['created_time'] = display_time(topic['created_time'])
             return json.dumps(topic)
 
         topics = Topic.get_all()
@@ -30,6 +30,7 @@ class TopicHandler:
                 user = User.get_by_id(t.owner_id)
                 CACHE_USER[t.owner_id] = user
             topic['owner_name'] = user.username
+            topic['created_time'] = display_time(topic['created_time'])
             result.append(topic)
         return json.dumps(result)
 
@@ -58,7 +59,7 @@ class TopicHandler:
             "title": topic_data.get('title'),
             "owner_id": session.user.id,
             "owner_name": session.user.username,
-            "created_time": str(topic_data.get('created_time')),
+            "created_time": display_time(topic_data.get('created_time')),
         }
         return json.dumps(result)
 

@@ -22,7 +22,7 @@ class UserHandler:
     def GET(self):
         # 获取当前登录的用户数据
         user = session.user
-        return json.dumps(user.to_json())
+        return json.dumps(user)
 
     def POST(self):
         data = web.data()

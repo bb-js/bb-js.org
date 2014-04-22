@@ -5,7 +5,7 @@ from datetime import datetime
 import web
 
 from models import Message, User
-from .base import bad_request
+from .base import bad_request, display_time
 
 session = web.config._session
 
@@ -29,7 +29,7 @@ class MessageHandler:
                 user = User.get_by_id(m.get('user_id'))
                 CACHE_USER[m.get('user_id')] = user
             message = dict(m)
-            message['created_time'] = str(message['created_time'])
+            message['created_time'] = display_time(message['created_time'])
             message['user_name'] = user.username
             message['is_mine'] = (current_user_id == user.id)
             result.append(message)
@@ -54,7 +54,7 @@ class MessageHandler:
             "topic_id": message_data.get("topic_id"),
             "user_id": session.user.id,
             "user_name": session.user.username,
-            "created_time": str(message_data.get("created_time")),
+            "created_time": display_time(message_data.get("created_time")),
             "is_mine": True,
         }
         return json.dumps(result)

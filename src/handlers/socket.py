@@ -8,6 +8,7 @@ from socketio.namespace import BaseNamespace
 from socketio.mixins import RoomsMixin, BroadcastMixin
 
 from models import Message
+from .base import display_time
 
 session = web.config._session
 
@@ -46,7 +47,7 @@ class ChatNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
         model.update({
             "user_name": user.username,
             'id': m_id,
-            'created_time': str(model['created_time']),
+            'created_time': display_time(model['created_time']),
             'is_mine': True,
         })
         # 发送回客户端

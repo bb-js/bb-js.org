@@ -1,4 +1,5 @@
 #coding:utf-8
+from web import Storage
 from pymongo import MongoClient
 
 
@@ -15,8 +16,7 @@ def get_next_id(name):
             update={'$inc': {'seq': 1}},
             upsert=True
         )
-    except TypeError as e:
-        print e
+    except TypeError:
         db.counters.insert(
             {
                 "_id": name,
@@ -37,11 +37,11 @@ class DBManage(object):
     def get_by_id(cls, id):
         id = int(id)
         obj = db[cls.table()].find_one({'_id': id})
-        return obj
+        return Storage(**obj)
 
     @classmethod
     def get_all(cls):
-        return [obj for obj in db[cls.table()].find()]
+        return [Storage(**obj) for obj in db[cls.table()].find()]
 
     @classmethod
     def create(cls, **model_dict):
@@ -69,26 +69,24 @@ class User(DBManage):
     password = None
     registed_time = None
 
-    def to_json(self):
-        return self.__dict__
-
     @classmethod
     def get_by_id(cls, id):
         obj = super(User, cls).get_by_id(id)
-        instance = cls()
         obj.pop('password')
         obj.pop('registed_time')
-        instance.__dict__ = obj
-        return instance
+        return obj
 
     @classmethod
     def get_by_username_password(cls, username, password):
         query = {"username": username, "password": password}
-        user = [obj for obj in db[cls.table()].find(query)]
+        user = [Storage(obj) for obj in db[cls.table()].find(query)]
         try:
-            return user[0]
+            obj = user[0]
         except IndexError:
             return None
+        obj.pop('password')
+        obj.pop('registed_time')
+        return obj
 
 
 class Topic(DBManage):

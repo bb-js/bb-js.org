@@ -13,7 +13,7 @@ define(function(require, exports, module) {
     });
 
     var LoginView = Backbone.View.extend({
-        el: "#login",
+        el: "#login_section",
         wrapper: $('#wrapper'),
 
         initialize: function(appRouter) {
