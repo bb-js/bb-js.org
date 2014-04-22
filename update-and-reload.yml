@@ -8,7 +8,5 @@
     - name: install requirements
       pip: requirements=~/bb-js-env/bb-js.org/requirements.txt 
            virtualenv=~/bb-js-env
-    - name: init database
-      shell: . ./bin/activate && cd bb-js.org/src && ./init_sqlite.py chdir=~/bb-js-env
     - name: run server.py
       shell: . ./bin/activate && cd bb-js.org &&  supervisorctl -c conf/supervisord.conf restart all chdir=~/bb-js-env
