@@ -1,6 +1,7 @@
 #coding:utf-8
 from web import Storage
 from pymongo import MongoClient
+import markdown
 
 
 client = MongoClient('localhost', 27017)
@@ -109,3 +110,13 @@ class Message(DBManage):
             "topic_id": topic_id
         }
         return [obj for obj in db[cls.table()].find(query)]
+
+    @classmethod
+    def create(cls, **model_dict):
+        content = model_dict.pop('content')
+        # markdown处理
+        content = markdown.markdown(content)
+        model_dict.update({
+            'content': content
+        })
+        return super(Message, cls).create(**model_dict)

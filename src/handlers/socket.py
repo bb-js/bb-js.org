@@ -6,6 +6,7 @@ import web
 from socketio import socketio_manage
 from socketio.namespace import BaseNamespace
 from socketio.mixins import RoomsMixin, BroadcastMixin
+import markdown
 
 from models import Message
 from .base import display_time
@@ -44,7 +45,9 @@ class ChatNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
             "created_time": datetime.now(),
         })
         m_id = Message.create(**model)
+        content = model.get('content')
         model.update({
+            "content": markdown.markdown(content),
             "user_name": user.username,
             'id': m_id,
             'created_time': display_time(model['created_time']),
