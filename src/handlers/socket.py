@@ -45,9 +45,10 @@ class ChatNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
             "created_time": datetime.now(),
         })
         m_id = Message.create(**model)
-        content = model.get('content')
+        raw_content = model.get('content')
         model.update({
-            "content": markdown.markdown(content),
+            "content": markdown.markdown(raw_content),
+            "raw_content": raw_content,
             "user_name": user.username,
             'id': m_id,
             'created_time': display_time(model['created_time']),

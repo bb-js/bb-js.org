@@ -36,6 +36,15 @@ define(function(require, exports, module) {
           return this;
         },
     });
+    $('textarea').live('keydown', function(e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == 9) {
+            e.preventDefault();
+            var s = this.selectionStart;
+            this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
+            this.selectionEnd = s+1;
+        } 
+    });
     module.exports = {
         "Messages": Messages,
         "Message": Message,

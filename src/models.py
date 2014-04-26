@@ -113,10 +113,11 @@ class Message(DBManage):
 
     @classmethod
     def create(cls, **model_dict):
-        content = model_dict.pop('content')
+        raw_content = model_dict.pop('content')
         # markdown处理
-        content = markdown.markdown(content)
+        content = markdown.markdown(raw_content)
         model_dict.update({
-            'content': content
+            'content': content,
+            'raw_content': raw_content
         })
         return super(Message, cls).create(**model_dict)
