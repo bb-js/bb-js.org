@@ -38,7 +38,7 @@ class MessageHandler:
     def POST(self):
         data = web.data()
         data = json.loads(data)
-        if not (session.user and session.user.id):
+        if not session.user or session.user.id is None:
             return bad_request("请先登录！")
 
         message_data = {

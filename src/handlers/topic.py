@@ -35,7 +35,7 @@ class TopicHandler:
         return json.dumps(result)
 
     def POST(self):
-        if not session.user or not session.user.id:
+        if not session.user or session.user.id is None:
             return bad_request('请先登录！')
         if session.user.username != 'the5fire':
             return bad_request('sorry，你没有创建权限')
