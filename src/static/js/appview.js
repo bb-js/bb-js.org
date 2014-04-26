@@ -96,6 +96,8 @@ define(function(require, exports, module) {
         },
 
         showTopic: function(){
+            socket.emit('index');
+
             topics.fetch();
             this.topic_section.show();
             this.message_section.addClass('hide');

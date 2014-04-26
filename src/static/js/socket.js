@@ -9,6 +9,13 @@ define(function(require, exports, module) {
         console.log('connected');
     });
 
+    socket.on('online_users', function(online_users){
+        $('#online_users').empty().append($('<span>Online: </span>'));
+        for (var i in online_users) {
+            $('#online_users').append($('<span class="badge">').text(online_users[i].username));
+        }
+    });
+
     $(window).bind("beforeunload", function() {
         socket.disconnect();
     });

@@ -23,6 +23,11 @@ class ChatNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
             print 'go_out', room_num
             self.leave(room_num)
 
+    def on_index(self):
+        user = self.environ['user']
+        self.request['online_users'].append(user)
+        self.broadcast_event('online_users', self.request['online_users'])
+
     def on_topic(self, topic_id):
         """ 加入以某个主题id为房间
 
@@ -66,8 +71,19 @@ class ChatNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
         )
 
     def recv_disconnect(self):
-        print 'DISCONNECT!!!!!!!!!!!!!!!!!!!!!!!'
+        user = self.environ['user']
+        try:
+            self.request['online_users'].remove(user)
+        except ValueError:
+            # 忽略不存在用户的异常
+            pass
+        self.broadcast_event('online_users', self.request['online_users'])
+
         self.disconnect(silent=True)
+
+request = {
+    'online_users': []
+}
 
 
 class SocketHandler:
@@ -77,6 +93,6 @@ class SocketHandler:
             "user": session.user,
             "session_id": session.session_id,
         })
-        socketio_manage(context, {'': ChatNamespace})
+        socketio_manage(context, {'': ChatNamespace}, request)
         # 重新载入session数据，因为session在socket请求中改变了
         session._load()
