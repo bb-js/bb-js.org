@@ -25,7 +25,8 @@ class ChatNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
 
     def on_index(self):
         user = self.environ['user']
-        self.request['online_users'].append(user)
+        if user not in self.request['online_users']:
+            self.request['online_users'].append(user)
         self.broadcast_event('online_users', self.request['online_users'])
 
     def on_topic(self, topic_id):
