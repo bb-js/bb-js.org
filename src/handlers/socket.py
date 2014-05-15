@@ -23,8 +23,10 @@ class ChatNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
             print 'go_out', room_num
             self.leave(room_num)
 
-    def on_index(self):
+    def on_index(self, username):
         user = self.environ['user']
+        if user is None:
+            user = {"username": username}
         if user not in self.request['online_users']:
             self.request['online_users'].append(user)
         self.broadcast_event('online_users', self.request['online_users'])

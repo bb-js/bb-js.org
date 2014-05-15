@@ -34,7 +34,8 @@ define(function(require, exports, module) {
             'click .submit_topic': 'saveTopic',
         },
 
-        initialize: function() {
+        initialize: function(approuter) {
+            this.approuter = approuter;
             _.bindAll(this, 'addTopic', 'addMessage');
 
             topics.bind('add', this.addTopic);
@@ -96,7 +97,7 @@ define(function(require, exports, module) {
         },
 
         showTopic: function(){
-            socket.emit('index');
+            socket.emit('index', this.approuter.g_user.username);
 
             topics.fetch();
             this.topic_section.show();

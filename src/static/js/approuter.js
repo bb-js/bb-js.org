@@ -23,7 +23,7 @@ define(function(require, exports, module) {
             // 设置全局用户
             this.g_user = g_user;
             // 初始化项目, 显示首页
-            this.appView = new AppView();
+            this.appView = new AppView(this);
             this.loginView = new LoginView(this);
             this.userView = new UserView();
             this.indexFlag = false;
