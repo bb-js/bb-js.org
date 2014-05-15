@@ -24,6 +24,9 @@ class TopicHandler:
         result = []
         for t in topics:
             topic = dict(t)
+            if 'tags' not in topic:
+                topic['tags'] = ''
+
             try:
                 user = CACHE_USER[t.owner_id]
             except KeyError:
@@ -43,6 +46,7 @@ class TopicHandler:
 
         topic_data = {
             "title": data.get('title'),
+            "tags": data.get('tags'),
             "owner_id": session.user.id,
             "created_time": datetime.now(),
         }
@@ -52,14 +56,12 @@ class TopicHandler:
         except sqlite3.IntegrityError:
             return bad_request('你已创建过该名称!')
 
-        result = {
+        topic_data.update({
             "id": topic_id,
-            "title": topic_data.get('title'),
-            "owner_id": session.user.id,
             "owner_name": session.user.username,
             "created_time": display_time(topic_data.get('created_time')),
-        }
-        return json.dumps(result)
+        })
+        return json.dumps(topic_data)
 
     def PUT(self, obj_id=None):
         data = web.data()

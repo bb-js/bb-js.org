@@ -77,18 +77,21 @@ define(function(require, exports, module) {
 
         saveTopic: function(evt) {
             var topic_title = $('#topic_title');
+            var topic_tags = $('#topic_tags');
             if (topic_title.val() == '') {
                 alert('主题不能为空！');
                 return false
             }
             var topic = new Topic({
                 title: topic_title.val(),
+                tags: topic_tags.val(),
             });
             self = this;
             topic.save(null, {
                 success: function(model, response, options){
                     topics.add(response);
                     topic_title.val('');
+                    topic_tags.val('');
                 },
                 error: function(model, resp, options){
                     alert(resp.responseText);

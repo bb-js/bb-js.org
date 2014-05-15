@@ -65,7 +65,7 @@
                     </div>
                     <div class="form-group">
                         <label for="topic_tag">Tag</label>
-                        <input type="text" class="form-control" id="topic_tag" placeholder="初学 文档">
+                        <input type="text" class="form-control" id="topic_tags" placeholder="初学 文档">
                     </div>
                     <a class="btn btn-default submit_topic">添加</a>
                     </form>
@@ -183,7 +183,7 @@
     <div class="col-sm-9">
         <h2><a href="#topic/<%= id %>"><%= title %></a></h2>
         <p>
-        标签:  时间：<%= created_time %>
+        标签:  <% if (tags) {%><%= tags %><% } %>  时间：<%= created_time %>
         </p>
     </div>
     <div class="author col-sm-2">
