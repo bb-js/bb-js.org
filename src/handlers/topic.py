@@ -44,9 +44,10 @@ class TopicHandler:
         data = web.data()
         data = json.loads(data)
 
+        tags = [tag for tag in data.get('tags', '').split(' ') if tag]
         topic_data = {
             "title": data.get('title'),
-            "tags": data.get('tags'),
+            "tags": tags,
             "owner_id": session.user.id,
             "created_time": datetime.now(),
         }
