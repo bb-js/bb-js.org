@@ -29,39 +29,47 @@ def get_next_id(name):
     return 0
 
 
+class class_property(object):
+    def __init__(self, func):
+        self.func = func
+
+    def __get__(self, instance, klass):
+        return self.func(klass)
+
+
 class DBManage(object):
-    @classmethod
+    @class_property
     def table(cls):
         return cls.__name__.lower()
 
     @classmethod
     def get_by_id(cls, id):
         id = int(id)
-        obj = db[cls.table()].find_one({'_id': id})
+        obj = db[cls.table].find_one({'_id': id})
         return Storage(**obj)
 
     @classmethod
     def get_all(cls):
-        return [Storage(**obj) for obj in db[cls.table()].find()]
+        return [Storage(**obj) for obj in db[cls.table].find()]
 
     @classmethod
     def create(cls, **model_dict):
-        _id = get_next_id(cls.table())
+        _id = get_next_id(cls.table)
         model_dict.update({
             '_id': _id,
             'id': _id,
         })
-        return db[cls.table()].insert(model_dict)
+        return db[cls.table].insert(model_dict)
 
     @classmethod
     def update(cls, **model_dict):
         query = {"_id": model_dict.pop('id')}
-        return db[cls.table()].update(query, model_dict)
+        return db[cls.table].update(query, model_dict)
 
     @classmethod
     def delete(cls, id):
         query = {"_id": id}
-        db[cls.table()].update(query, {'available': False})
+        db[cls.table].update(query, {'available': False})
 
 
 class User(DBManage):
@@ -80,7 +88,7 @@ class User(DBManage):
     @classmethod
     def get_by_username_password(cls, username, password):
         query = {"username": username, "password": password}
-        user = [Storage(obj) for obj in db[cls.table()].find(query)]
+        user = [Storage(obj) for obj in db[cls.table].find(query)]
         try:
             obj = user[0]
         except IndexError:
@@ -109,7 +117,7 @@ class Message(DBManage):
         query = {
             "topic_id": topic_id
         }
-        return [obj for obj in db[cls.table()].find(query)]
+        return [obj for obj in db[cls.table].find(query)]
 
     @classmethod
     def create(cls, **model_dict):
