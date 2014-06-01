@@ -123,7 +123,7 @@ class Message(DBManage):
     def create(cls, **model_dict):
         raw_content = model_dict.pop('content')
         # markdown处理
-        content = markdown.markdown(raw_content)
+        content = markdown.markdown(raw_content, safe_mode=True)
         model_dict.update({
             'content': content,
             'raw_content': raw_content
