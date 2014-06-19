@@ -122,9 +122,9 @@ class Message(DBManage):
     @classmethod
     def get_latest_by_topic(cls, topic_id):
         query = {
-            "topic_id": topic_id
+            "topic_id": topic_id,
         }
-        result = db[cls.table].find_one(query)
+        result = db[cls.table].find_one(query, sort=[("_id", -1)])
         if result:
             return Storage(result)
 
