@@ -5,8 +5,8 @@ from datetime import datetime
 
 import web
 
-from models import User, Topic
-from .base import bad_request, display_time
+from models import User, Topic, Message
+from .base import bad_request, display_time, pass_time
 
 session = web.config._session
 
@@ -34,6 +34,20 @@ class TopicHandler:
                 CACHE_USER[t.owner_id] = user
             topic['owner_name'] = user.username
             topic['created_time'] = display_time(topic['created_time'])
+
+            message = Message.get_latest_by_topic(str(t.id))
+            message_count = Message.topic_count(str(t.id))
+            if message:
+                # 最新回复
+                try:
+                    user = CACHE_USER[message.user_id]
+                except KeyError:
+                    user = User.get_by_id(message.user_id)
+                    CACHE_USER[message.user_id] = user
+                message.user_name = user.username
+                message.created_time = pass_time(message.created_time)
+            topic['new_comment'] = message
+            topic['message_count'] = message_count
             result.append(topic)
         return json.dumps(result)
 

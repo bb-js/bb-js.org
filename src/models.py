@@ -50,7 +50,7 @@ class DBManage(object):
 
     @classmethod
     def get_all(cls):
-        return [Storage(**obj) for obj in db[cls.table].find()]
+        return [Storage(**obj) for obj in db[cls.table].find().sort("_id", -1)]
 
     @classmethod
     def create(cls, **model_dict):
@@ -111,6 +111,22 @@ class Message(DBManage):
     top_id = None
     user_id = None
     reply_to = None
+
+    @classmethod
+    def topic_count(cls, topic_id):
+        query = {
+            "topic_id": topic_id
+        }
+        return db[cls.table].find(query).count()
+
+    @classmethod
+    def get_latest_by_topic(cls, topic_id):
+        query = {
+            "topic_id": topic_id
+        }
+        result = db[cls.table].find_one(query)
+        if result:
+            return Storage(result)
 
     @classmethod
     def get_by_topic(cls, topic_id):

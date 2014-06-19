@@ -178,7 +178,7 @@
 
 <script type="text/template" id="topic-template">
     <div class="status col-sm-1">
-        <span>人参与</span>
+        <span style="margin-top: 73px; width: 55px;display: block;"><%= message_count %>回复</span>
     </div>
     <div class="col-sm-9">
         <h2><a href="#topic/<%= id %>"><%= title %></a></h2>
@@ -191,6 +191,21 @@
         创建者：<%= owner_name %>
         </p>
     </div>
+    <% if (new_comment) {%>
+    <br/>
+        <div class="col-sm-12">
+            <div class="new_comment">
+                <div class="comment_title">
+                最新回复
+                </div>
+                <div class="comment_content">
+                    <%= new_comment.content %>
+                    <br/>
+                    -- <%= new_comment.user_name %>  <%= new_comment.created_time %>
+                </div>
+            </div>
+        </div>
+    <% } %>
 </script>
 
 <script type="text/template" id="message-template">
