@@ -21,6 +21,10 @@ define(function(require, exports, module) {
         tagName:  "li class='row topic'",
         templ: _.template($('#topic-template').html()),
 
+        initialize: function() {
+            this.listenTo(this.model, 'change', this.render);
+        },
+
         // 渲染列表页模板
         render: function() {
           $(this.el).html(this.templ(this.model.toJSON()));
