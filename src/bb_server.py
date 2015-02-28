@@ -47,7 +47,7 @@ if __name__ == "__main__":
         PORT = int(sys.argv[1])
     print 'http://localhost:%s' % PORT
     server.SocketIOServer(
-        ('localhost', PORT),
+        ('0.0.0.0', PORT),
         application,
         resource="socket.io",
         policy_server=True,

@@ -1,10 +1,11 @@
-#coding:utf-8
+# coding:utf-8
 from web import Storage
 from pymongo import MongoClient
 import markdown
 
 
-client = MongoClient('localhost', 27017)
+# docker instance name: mongodb
+client = MongoClient('mongodb', 27017)
 db = client.bb_js_db
 
 
